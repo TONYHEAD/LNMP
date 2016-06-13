@@ -1,7 +1,7 @@
 CentOS 7 YUM 安装 LNMP 环境
 =======
 
-CentOS 7 YUM Installation: Nginx 1.8/1.9 + MySQL 5.5/5.6/5.7(MariaDB 5.5/10.0/10.1) + PHP 5.5/5.6/7.0 + phpMyAdmin(Adminer)
+CentOS 7 YUM Installation: Nginx 1.8/1.9 + MySQL 5.5/5.6/5.7(MariaDB 5.5/10.0/10.1) + PHP 5.5/5.6/7.0 + phpMyAdmin(Adminer) + Memcached
 
 ## 1、主要目录
 
@@ -33,7 +33,7 @@ SVN 配置： `/var/svn/repos/`
 
 ```bash
 ## 一键安装命令
-yum install -y wget unzip && wget https://git.io/v2OPx -O LNMP.zip && unzip LNMP.zip && cd LNMP-master && bash lnmp.sh
+yum install -y wget unzip && wget https://github.com/TONYHEAD/LNMP/archive/master.zip -O LNMP.zip && unzip LNMP.zip && cd LNMP-master && bash lnmp.sh
 
 
 ## 分步骤安装命令
@@ -42,7 +42,7 @@ yum install -y wget unzip && wget https://git.io/v2OPx -O LNMP.zip && unzip LNMP
 yum install -y wget unzip
 
 # 2、下载并解压安装包
-wget https://github.com/maicong/LNMP/archive/master.zip
+wget https://github.com/TONYHEAD/LNMP/archive/master.zip
 
 # 3、解压安装包
 unzip master.zip
