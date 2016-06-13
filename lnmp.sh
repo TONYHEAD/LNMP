@@ -385,12 +385,6 @@ function ConfigService() {
     chown www:www -R /home/wwwroot;
     chown mysql:mysql -R /home/userdata;
     
-    echo 'PORT="11211"' >> /etc/sysconfig/memcached;
-    echo 'USER="memcached"' >> /etc/sysconfig/memcached;
-    echo 'MAXCONN="1024"' >> /etc/sysconfig/memcached;
-    echo 'CACHESIZE="256"' >> /etc/sysconfig/memcached;
-    echo 'OPTIONS=""' >> /etc/sysconfig/memcached;
-    
 }
 
 ## 启动服务
