@@ -342,7 +342,7 @@ function InstallService() {
         mysql_install_db --user=mysql;
     fi;
 
-    yum install -y nginx php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pdo_dblib php-recode php-snmp php-soap php-xml php-pecl-zip;
+    yum install -y nginx php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pdo_dblib php-recode php-snmp php-soap php-xml php-pecl-zip php-apc php-apcu php-memcache php-memcached memcached rsync;
 }
 
 ## 配置服务
@@ -384,6 +384,13 @@ function ConfigService() {
 
     chown www:www -R /home/wwwroot;
     chown mysql:mysql -R /home/userdata;
+    
+    echo 'PORT="11211"' >> /etc/sysconfig/memcached;
+    echo 'USER="memcached"' >> /etc/sysconfig/memcached;
+    echo 'MAXCONN="1024"' >> /etc/sysconfig/memcached;
+    echo 'CACHESIZE="256"' >> /etc/sysconfig/memcached;
+    echo 'OPTIONS=""' >> /etc/sysconfig/memcached;
+    
 }
 
 ## 启动服务
@@ -393,6 +400,7 @@ function StartService() {
     systemctl enable php-fpm.service;
     systemctl enable nginx.service;
     systemctl enable firewalld.service;
+    systemctl enable memcached.service;
 
     systemctl start firewalld.service
 
@@ -403,6 +411,7 @@ function StartService() {
     systemctl start ${installDB}.service;
     systemctl start php-fpm.service;
     systemctl start nginx.service;
+    systemctl start memcached.service;
 
     mysqladmin -u root password "$mysqlPWD";
     mysqladmin -u root -p"$mysqlPWD" -h $(hostname) password "$mysqlPWD";
