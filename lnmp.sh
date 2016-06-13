@@ -408,7 +408,7 @@ function StartService() {
     systemctl start memcached.service;
 
     mysqladmin -u root password "$mysqlPWD";
-    mysqladmin -u root -p"$mysqlPWD" -h $(hostname) password "$mysqlPWD";
+    mysqladmin -u root -p"$mysqlPWD" -h 127.0.0.1 password "$mysqlPWD";
     mysql -u root -p"$mysqlPWD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');DELETE FROM mysql.user WHERE User='';DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';FLUSH PRIVILEGES;";
     rm -rf /home/userdata/test;
     echo $mysqlPWD > /home/userdata/initialPWD.txt;
