@@ -342,7 +342,7 @@ function InstallService() {
         mysql_install_db --user=mysql;
     fi;
 
-    yum install -y nginx php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pdo_dblib php-recode php-snmp php-soap php-xml php-pecl-zip php-apc php-apcu php-memcache php-memcached memcached rsync;
+    yum install -y nginx php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pdo_dblib php-recode php-snmp php-soap php-xml php-pecl-zip php-apc php-apcu php-memcache php-memcached memcached rsync goaccess crontabs;
 }
 
 ## 配置服务
@@ -395,6 +395,7 @@ function StartService() {
     systemctl enable nginx.service;
     systemctl enable firewalld.service;
     systemctl enable memcached.service;
+    systemctl enable crond.service;
 
     systemctl start firewalld.service
 
@@ -406,6 +407,7 @@ function StartService() {
     systemctl start php-fpm.service;
     systemctl start nginx.service;
     systemctl start memcached.service;
+    systemctl start crond.service;
 
     mysqladmin -u root password "$mysqlPWD";
     mysqladmin -u root -p"$mysqlPWD" -h 127.0.0.1 password "$mysqlPWD";
